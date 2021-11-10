@@ -174,7 +174,7 @@ SEIRfitting=function(init_sets_list,
     
     summary_string = paste0(summary_string, "\n", paste(clearance_date, collapse = ", "), "\n")
   }
-  
+  summary_run_[[run_id]] <- summary_string
   # write_file(summary_string, paste0("../output/summary_run_",run_id,".txt"))
   
   # cairo_pdf(paste0("../output/par_cor_run_",run_id,".pdf"),width=10,height=10)
