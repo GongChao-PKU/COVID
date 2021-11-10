@@ -61,8 +61,8 @@ SEIRfitting=function(init_sets_list,
                      pars_sampler=default_pars_sampler,
                      pars_name=c("b12", "b3", "b4", "b5", "r12", "delta3", "delta4", "delta5"),
                      calc_clearance=T,
-                     n_burn_in=4000,
-                     n_iterations=180000) {
+                     n_burn_in=400,
+                     n_iterations=18000) {
   if (randomize_startValue & !is.na(startValue)) {
     print("startValue will be ignored since randomize_startValue is set to TRUE!")
   } else if (!randomize_startValue & is.na(startValue)) {
@@ -175,34 +175,35 @@ SEIRfitting=function(init_sets_list,
     summary_string = paste0(summary_string, "\n", paste(clearance_date, collapse = ", "), "\n")
   }
   
-  write_file(summary_string, paste0("../output/summary_run_",run_id,".txt"))
+  # write_file(summary_string, paste0("../output/summary_run_",run_id,".txt"))
   
-  cairo_pdf(paste0("../output/par_cor_run_",run_id,".pdf"),width=10,height=10)
+  # cairo_pdf(paste0("../output/par_cor_run_",run_id,".pdf"),width=10,height=10)
   correlationPlot_modified(mcmc_pars_estimate, scaleCorText = F)
-  dev.off()
+  # dev.off()
   
-  png(paste0("../output/par_hist_run_",run_id,".png"))
+  # png(paste0("../output/par_hist_run_",run_id,".png"))
   par(mfrow = c(2, 4))
   for(i in 1:n_pars) {
     hist(mcmc_pars_estimate[, i], xlab = pars_name[i], main = "", col = "red")
     rm(i)
   }
-  dev.off()
+  # dev.off()
   
-  png(paste0("../output/par_traj_run_",run_id,".png"), width=1000, height=500)
+  # png(paste0("../output/par_traj_run_",run_id,".png"), width=1000, height=500)
   par(mfrow = c(2, 4))
   for(i in 1:n_pars) {
     plot(1:nrow(mcmc_pars_estimate), mcmc_pars_estimate[, i], ylab = pars_name[i], xlab = "iter", main = "", type = "l")
     rm(i)
   }
-  dev.off()
+  # dev.off()
   
   if (plot_combined_fig) {
     SEIRplot(pars_estimate = mcmc_pars_estimate, file_name = run_id, init_settings = init_sets_list, panel_B_R_ylim = panel_B_R_ylim)
   }
   
-  par(mfrow = c(1, 1))
+  # par(mfrow = c(1, 1))
   # corrplot(cor(mcmc_pars_estimate))
   # pairs(mcmc_pars_estimate)
-  
+  print(summary_run_[[run_id]])
+  return(pars_est_run_[[run_id]])
 }
