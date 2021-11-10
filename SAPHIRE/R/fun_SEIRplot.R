@@ -24,7 +24,7 @@ SEIRplot <- function(pars_estimate, file_name, init_settings, panel_B_R_ylim=4) 
   ptime <- 1:length(onset_obs_all)
   mydate <- c(paste("Jan", 1:31), paste("Feb", 1:29), paste("Mar", 1:8))
   #
-  pdf(paste0("../output/Figure_", file_name, ".pdf"), width = 9, height = 10)
+  # pdf(paste0("../output/Figure_", file_name, ".pdf"), width = 9, height = 10)
   par(mar = c(4, 5, 2.5, 1))
   layout(matrix(c(1:6), byrow = T, nrow = 3))
   
@@ -166,5 +166,5 @@ SEIRplot <- function(pars_estimate, file_name, init_settings, panel_B_R_ylim=4) 
   legend("topleft", legend = c("Presymptomatic (P)", "Unascertained (A)", "Ascertained (I)"), fill = c("#0072B5FF", "#FFDC91FF", "#BC3C29FF"), bty = "n")
   text(par()$usr[1] - (par()$usr[2] -par()$usr[1]) * 0.12, par()$usr[4] + (par()$usr[4] - par()$usr[3]) * 0.06, labels = "F", xpd = T, cex = 2)
   ##figure_F finished
-  dev.off()
+  # dev.off()
 }
