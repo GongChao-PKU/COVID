@@ -129,11 +129,11 @@ SEIRfitting=function(init_sets_list,
     colnames(mcmc_pars_estimate) <- pars_name 
     
     if (output_ret) {
-      write.table(mcmc_pars_estimate, paste0("../output/pars_est_run_",run_id,".txt"), quote = F, row.names = F, sep = "\t")
+      pars_est_run_[[run_id]] <- mcmc_pars_estimate
     }
   } else {
-    mcmc_pars_estimate = read.table(paste0("../output/pars_est_run_",run_id,".txt"), header = T)
-    pars_name = names(mcmc_pars_estimate)
+    mcmc_pars_estimate = pars_est_run_[[run_id]]
+      pars_name = names(mcmc_pars_estimate)
   }
   
   summary_string=paste0(paste(pars_name, collapse = ","), "\n")
